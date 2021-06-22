@@ -14,7 +14,32 @@ header {
 }
 
 /* Formatting for the main content */
+main {
+  margin: 20px;
+}
 
+/* Formatting for the search column */
+.textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  height: 40px;
+  color: #000000;
+  padding: 10px;
+}
+
+.button {
+  width: 100%;
+  background-color: #06aed5;
+  border-radius: 10px;
+  color: white;
+  height: 40px;
+  margin-top: 10px;
+  border: none;
+}
+
+/* Formatting for the results column */
 
 
 /* Formatting for changes in screen size */
