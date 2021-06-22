@@ -42,4 +42,5 @@ You can access the website [here]().
 [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)<br>
 [W3 Schools](https://www.w3schools.com/)<br>
 [jQuery](https://jquery.com)<br>
-[jQueryUI](https://jqueryui.com)
+[jQueryUI](https://jqueryui.com)<br>
+[Background Image](https://www.bates.edu/wordpress/blueprints/header-background-images/)

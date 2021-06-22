@@ -6,8 +6,12 @@ body {
 }
 
 /* Formatting for the header */
-
-
+header {
+  background-image: url("../images/header_background.jpg");
+  background-color: #cccccc;
+  color: #ffffff;
+  padding: 10px 0px 10px 20px;
+}
 
 /* Formatting for the main content */
 
