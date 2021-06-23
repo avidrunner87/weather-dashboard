@@ -39,6 +39,21 @@ main {
   border: none;
 }
 
+.searchHistory {
+  background-color: gray;
+}
+
+.button:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.separator {
+  height: 0px;
+  border-bottom: 1px solid #000000;
+  margin: 10px 0px 0px 0px;
+}
+
 /* Formatting for the results column */
 
 
