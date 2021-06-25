@@ -23,6 +23,11 @@ function renderHeader() {
 
 // Create the main content
 function renderMainContent() {
+    // Build content DIV
+    let $contentDiv = $("<div>");
+    $contentDiv.addClass("row gx-4 gy-4");
+    $("main").append($contentDiv);
+
     // Build the Search column
     let $searchColumnDiv = $("<div>");
     $searchColumnDiv.attr("id", "search");
@@ -30,7 +35,6 @@ function renderMainContent() {
     
     // Build Search column title
     let $searchTitleH2 = $("<h2>");
-    $searchTitleH2.addClass("display-6");
     $searchTitleH2.text("Search for a city:");
     $searchColumnDiv.append($searchTitleH2);
 
@@ -87,7 +91,7 @@ function renderMainContent() {
     $searchColumnDiv.append($searchHistoryDiv);
 
     // Append Search to main content
-    $("main").append($searchColumnDiv);
+    $($contentDiv).append($searchColumnDiv);
 
     // Build the Results column
     let $resultsColumnDiv = $("<div>");
@@ -95,7 +99,7 @@ function renderMainContent() {
     $resultsColumnDiv.addClass("col-md-9");
 
     // Append the Results to the main content
-    $("main").append($resultsColumnDiv);
+    $($contentDiv).append($resultsColumnDiv);
 
     // Render Search history
     renderSearchHistory();
@@ -142,18 +146,57 @@ function searchInputAutoComplete() {
 
 // Render the Results column
 function renderResults(cityId) {
+
     let searchItems = JSON.parse(localStorage.getItem("weatherDashboard_searchItems"));
 
     for (let i = 0; i < searchItems.length; i++) {
         if (searchItems[i].cityId === cityId) {
-            // Build Result column title
-            $("#results").empty();
-            let $resultsTitleH2 = $("<h2>");
-            $resultsTitleH2.addClass("display-6");
-            $resultsTitleH2.text(searchItems[i].cityName);
 
-            // Append the results to the Results column
-            $("#results").append($resultsTitleH2);
+            // Set the requestUrl for the weather API
+            let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${searchItems[i].cityLAT}&lon=${searchItems[i].cityLNG}&appid=33e00170884c3cd4fa86aa23f7431b3e`
+
+            // Clear and Build the Result column
+            $("#results").empty();
+
+            fetch(requestUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // TODO: Remove console.log from the code before finishing
+                console.log(data);
+
+                // Build the header row
+                let $resultsHeaderDiv = $("<div>");
+                $resultsHeaderDiv.addClass("row");
+
+                let $resultsTitleH2 = $("<h2>");
+                $resultsTitleH2.addClass("display-6");
+                $resultsTitleH2.text(searchItems[i].cityName);
+                $resultsHeaderDiv.append($resultsTitleH2);
+
+                let $resultsCurrWX = $("<img>");
+                let imgSrc = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`;
+                $resultsCurrWX.attr("src", imgSrc);
+                $resultsHeaderDiv.append($resultsCurrWX);
+                
+                // Append the header to the Results column
+                $("#results").append($resultsHeaderDiv);
+
+                // // Build the forecast row
+                // let $resultsForecastDiv = $("<div>");
+                // $resultsForecastDiv.addClass("row");
+
+                // let $resultsForecastTodayDiv = $("<div>");
+                // $resultsForecastTodayDiv.addClass("col-md-2 forecast");
+                // $resultsForecastDiv.append($resultsForecastTodayDiv);
+
+                // let $resultsForecastFutureDiv = $("<div>");
+                // $resultsForecastFutureDiv.addClass("col-md-9 forecast");
+                // $resultsForecastDiv.append($resultsForecastFutureDiv);
+
+                // $("#results").append($resultsForecastDiv);
+            });
         }
     }
 }
