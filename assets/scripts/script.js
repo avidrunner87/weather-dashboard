@@ -114,10 +114,7 @@ function renderSearchHistory() {
         searchItems = [];
     }
 
-    // TODO: Fix the sort on the searchItems array
-    searchItems.sort(function(a, b) {
-        return a.cityName - b.cityName
-    });
+    searchItems.reverse();
 
     for (let i = 0; i < searchItems.length; i++) {
         let $searchHistoryButton = $("<button>");

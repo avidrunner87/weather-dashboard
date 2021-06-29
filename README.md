@@ -26,7 +26,7 @@ THEN I am again presented with current and future conditions for that city
 ### Mock-up
 The following picture shows the website appearance and capabilities:
 
-![Website Mock-Up]()
+![Website Mock-Up](./assets/images/website-mockup.gif)
 
 ## Installation
 To fork this code to further improve the website, please follow these directions:
@@ -36,11 +36,12 @@ To fork this code to further improve the website, please follow these directions
 
 _This assumes that you have setup your own SSH keys to connect with Github._
 ## Usage
-You can access the website [here]().
+You can access the website [here](https://avidrunner87.github.io/weather-dashboard/).
 
 ## References
 [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)<br>
 [W3 Schools](https://www.w3schools.com/)<br>
 [jQuery](https://jquery.com)<br>
 [jQueryUI](https://jqueryui.com)<br>
+[Moment JS](https://momentjs.com/)<br>
 [Background Image](https://www.bates.edu/wordpress/blueprints/header-background-images/)
