@@ -25,13 +25,13 @@ function renderHeader() {
 function renderMainContent() {
     // Build content DIV
     let $contentDiv = $("<div>");
-    $contentDiv.addClass("row gx-4 gy-4");
+    $contentDiv.addClass("row");
     $("main").append($contentDiv);
 
     // Build the Search column
     let $searchColumnDiv = $("<div>");
     $searchColumnDiv.attr("id", "search");
-    $searchColumnDiv.addClass("col-md-3");
+    $searchColumnDiv.addClass("col-md-3 mb-3");
     
     // Build Search column title
     let $searchTitleH2 = $("<h2>");
@@ -70,7 +70,7 @@ function renderMainContent() {
     let searchButtonIcon = $("<i class=\"fas fa-search-location\"></i>");
     let $searchButton = $("<button>");
     $searchButton.attr("id", "searchButton");
-    $searchButton.addClass("button");
+    $searchButton.addClass("button my-3");
 
     let $searchButtonSpan = $("<span>");
     $searchButtonSpan.text("  Search");
@@ -103,13 +103,11 @@ function renderMainContent() {
 
     // Render Search history
     renderSearchHistory();
-
-    searchInput = document.getElementById("searchInput");
 }
 
 // Create the Search history
 function renderSearchHistory() {
-    $("#searchHistory").empty();
+    $(".searchHistory").remove();
     // Get the list of search history items from local storage
     let searchItems = JSON.parse(localStorage.getItem("weatherDashboard_searchItems"));
     if (searchItems === null) {
@@ -125,7 +123,7 @@ function renderSearchHistory() {
         let $searchHistoryButton = $("<button>");
         $searchHistoryButton.attr("id", `searchHistory_item${i}`);
         $searchHistoryButton.attr("cityId", searchItems[i].cityId);
-        $searchHistoryButton.addClass("button searchHistory");
+        $searchHistoryButton.addClass("button searchHistory mt-3");
     
         let $searchButtonSpan = $("<span>");
         $searchButtonSpan.text(searchItems[i].cityName);
@@ -153,7 +151,7 @@ function renderResults(cityId) {
         if (searchItems[i].cityId === cityId) {
 
             // Set the requestUrl for the weather API
-            let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${searchItems[i].cityLAT}&lon=${searchItems[i].cityLNG}&appid=33e00170884c3cd4fa86aa23f7431b3e`
+            let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${searchItems[i].cityLAT}&lon=${searchItems[i].cityLNG}&units=imperial&exclude=minutely,hourly&appid=33e00170884c3cd4fa86aa23f7431b3e`
 
             // Clear and Build the Result column
             $("#results").empty();
@@ -166,36 +164,165 @@ function renderResults(cityId) {
                 // TODO: Remove console.log from the code before finishing
                 console.log(data);
 
+                // Build current weather Div
+                let $resultsCurrWXDiv = $("<div>");
+                $resultsCurrWXDiv.attr("id", "currWX");
+                $resultsCurrWXDiv.addClass("card");
+
                 // Build the header row
-                let $resultsHeaderDiv = $("<div>");
-                $resultsHeaderDiv.addClass("row");
+                let $resultsCurrWXTitle = $("<h2>");
+                $resultsCurrWXTitle.addClass("card-header text-white");
+                $resultsCurrWXTitle.text(searchItems[i].cityName);
 
-                let $resultsTitleH2 = $("<h2>");
-                $resultsTitleH2.addClass("display-6");
-                $resultsTitleH2.text(searchItems[i].cityName);
-                $resultsHeaderDiv.append($resultsTitleH2);
-
+                // Build the weather image next to the title
                 let $resultsCurrWX = $("<img>");
                 let imgSrc = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`;
                 $resultsCurrWX.attr("src", imgSrc);
-                $resultsHeaderDiv.append($resultsCurrWX);
-                
-                // Append the header to the Results column
-                $("#results").append($resultsHeaderDiv);
+                $resultsCurrWX.attr("title", data.current.weather[0].description);
+                $resultsCurrWX.attr("alt", data.current.weather[0].description);
 
-                // // Build the forecast row
-                // let $resultsForecastDiv = $("<div>");
-                // $resultsForecastDiv.addClass("row");
+                // Append the header
+                $resultsCurrWXTitle.append($resultsCurrWX);
+                $resultsCurrWXDiv.append($resultsCurrWXTitle);
 
-                // let $resultsForecastTodayDiv = $("<div>");
-                // $resultsForecastTodayDiv.addClass("col-md-2 forecast");
-                // $resultsForecastDiv.append($resultsForecastTodayDiv);
+                // Build the current weather card body
+                let $resultsCurrDtls = $("<div>");
+                $resultsCurrDtls.addClass("card-body container");
 
-                // let $resultsForecastFutureDiv = $("<div>");
-                // $resultsForecastFutureDiv.addClass("col-md-9 forecast");
-                // $resultsForecastDiv.append($resultsForecastFutureDiv);
+                // Build the current temperature on card body
+                let $resultsCurrWXTemp = $("<p>");
 
-                // $("#results").append($resultsForecastDiv);
+                let $resultsCurrWXTempTitle = $("<span>");
+                $resultsCurrWXTempTitle.text("Temperature: ");
+                $resultsCurrWXTemp.append($resultsCurrWXTempTitle);
+                $resultsCurrWXTemp.append(`${data.current.temp} &#176;F`);
+                $resultsCurrDtls.append($resultsCurrWXTemp);
+
+                // Build the current wind on card body
+                let $resultsCurrWXWind = $("<p>");
+
+                let $resultsCurrWXWindTitle = $("<span>");
+                $resultsCurrWXWindTitle.text("Wind: ");
+                $resultsCurrWXWind.append($resultsCurrWXWindTitle);
+                $resultsCurrWXWind.append(`${data.current.wind_speed} MPH`);
+                $resultsCurrDtls.append($resultsCurrWXWind);
+
+                // Build the current humidity on card body
+                let $resultsCurrWXHum = $("<p>");
+
+                let $resultsCurrWXHumTitle = $("<span>");
+                $resultsCurrWXHumTitle.text("Humidity: ");
+                $resultsCurrWXHum.append($resultsCurrWXHumTitle);
+                $resultsCurrWXHum.append(`${data.current.humidity} %`);
+                $resultsCurrDtls.append($resultsCurrWXHum);
+
+                // Build the current UV index on card body
+                let $resultsCurrWXUVI = $("<p>");
+
+                let $resultsCurrWXUVITitle = $("<span>");
+                $resultsCurrWXUVITitle.text("UV Index: ");
+                $resultsCurrWXUVI.append($resultsCurrWXUVITitle);
+                let $resultsCurrWXUVIBadge = $("<span>");
+                $resultsCurrWXUVIBadge.addClass("badge rounded-pill");
+
+                let varUVI = data.current.uvi;
+
+                switch(true) {
+                    case (0 <= varUVI && varUVI < 3):
+                        // UV index is low
+                        $resultsCurrWXUVIBadge.addClass("bg-success");
+                        break;
+                    case ( 3 <= varUVI && varUVI < 8):
+                        // UV index is moderate to high
+                        $resultsCurrWXUVIBadge.addClass("bg-warning text-dark");
+                        break;
+                    case ( 8 <= varUVI):
+                        // UV index very high to extreme
+                        $resultsCurrWXUVIBadge.addClass("bg-danger");
+                        break;
+                }
+
+                $resultsCurrWXUVIBadge.text(varUVI);
+                $resultsCurrWXUVI.append($resultsCurrWXUVIBadge);
+                $resultsCurrDtls.append($resultsCurrWXUVI);
+
+                let $resultsForcWX = $("<div>");
+                $resultsForcWX.addClass("row row-cols-md-5");
+
+                for (let i = 1; i < 6; i++) {
+                    // Build current weather Div
+                    let $resultsForcWXDiv = $("<div>");
+                    $resultsForcWXDiv.addClass("card text-white forcWX mb-3 col-xxl-2 col-lg-3 col-md-4 col-5 m-2");
+
+                    // Build the header row
+                    let $resultsForcWXTitle = $("<div>");
+                    $resultsForcWXTitle.addClass("card-header");
+                    $resultsForcWXTitle.text(moment(data.daily[i].dt * 1000).format("YYYY-MM-DD"));
+
+                    // Build the current weather card body
+                    let $resultsForcWXDtls = $("<div>");
+                    $resultsForcWXDtls.addClass("card-body");
+
+                    // Build the weather image next for the forecast
+                    let $resultsForcWXImg = $("<img>");
+                    let forcImgSrc = `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png`;
+                    $resultsForcWXImg.attr("src", forcImgSrc);
+                    $resultsForcWXImg.attr("title", data.daily[i].weather[0].description);
+                    $resultsForcWXImg.attr("alt", data.daily[i].weather[0].description);
+                    $resultsForcWXDtls.append($resultsForcWXImg);
+
+                    // Build the current temperature on card body
+                    let $resultsForcWXTemp = $("<p>");
+
+                    let $resultsForcWXTempTitle = $("<span>");
+                    $resultsForcWXTempTitle.text("Temperature: ");
+                    $resultsForcWXTemp.append($resultsForcWXTempTitle);
+                    $resultsForcWXTemp.append(`${data.daily[i].temp.day} &#176;F`);
+                    $resultsForcWXDtls.append($resultsForcWXTemp);
+
+                    // Build the current wind on card body
+                    let $resultsForcWXWind = $("<p>");
+
+                    let $resultsForcWXWindTitle = $("<span>");
+                    $resultsForcWXWindTitle.text("Wind: ");
+                    $resultsForcWXWind.append($resultsForcWXWindTitle);
+                    $resultsForcWXWind.append(`${data.daily[i].wind_speed} MPH`);
+                    $resultsForcWXDtls.append($resultsForcWXWind);
+
+                    // Build the current humidity on card body
+                    let $resultsForcWXHum = $("<p>");
+
+                    let $resultsForcWXHumTitle = $("<span>");
+                    $resultsForcWXHumTitle.text("Humidity: ");
+                    $resultsForcWXHum.append($resultsForcWXHumTitle);
+                    $resultsForcWXHum.append(`${data.daily[i].humidity} %`);
+                    $resultsForcWXDtls.append($resultsForcWXHum);
+
+                    $resultsForcWXDiv.append($resultsForcWXTitle);
+                    $resultsForcWXDiv.append($resultsForcWXDtls);
+                    $resultsForcWX.append($resultsForcWXDiv);
+                }
+
+                // Append current weather and forecast to results
+                $resultsCurrDtls.append($resultsForcWX);
+                $resultsCurrWXDiv.append($resultsCurrDtls);
+                $("#results").append($resultsCurrWXDiv);
+
+
+
+
+
+
+
+// <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+//  <div class="card-header">Header</div>
+//  <div class="card-body">
+//    <h5 class="card-title">Secondary card title</h5>
+//    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//  </div>
+// </div>
+
+
             });
         }
     }
@@ -260,9 +387,7 @@ document.querySelector("#search").addEventListener("click", function(event) {
 
 google.maps.event.addListener(autocomplete, "place_changed", function() {
     let searchPlace = autocomplete.getPlace();
-
-    console.log(searchPlace);
-
+    
     document.getElementById('searchInputId').value = searchPlace.place_id;
     document.getElementById('searchInputLAT').value = searchPlace.geometry.location.lat();
     document.getElementById('searchInputLNG').value = searchPlace.geometry.location.lng();
