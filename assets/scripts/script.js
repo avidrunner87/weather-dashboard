@@ -170,6 +170,7 @@ function renderResults(cityId) {
                 let $resultsCurrWXTitle = $("<h2>");
                 $resultsCurrWXTitle.addClass("card-header text-white");
                 $resultsCurrWXTitle.text(searchItems[i].cityName);
+                $resultsCurrWXTitle.append(` (${moment(data.current.dt * 1000).format("YYYY-MM-DD")})`)
 
                 // Build the weather image next to the title
                 let $resultsCurrWX = $("<img>");
