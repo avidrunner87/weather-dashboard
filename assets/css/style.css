@@ -8,6 +8,8 @@ body {
 /* Formatting for the header */
 header {
   background-image: url("../images/header_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: #cccccc;
   color: #ffffff;
   padding: 10px 0px 10px 20px;

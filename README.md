@@ -1,7 +1,11 @@
 # Weather Dashboard
 ## Description
 Using the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities we have created a simple dashboard to see what the weather is in a city.
-### User Story
+
+## Usage
+You can access the app here: [https://avidrunner87.github.io/weather-dashboard/](https://avidrunner87.github.io/weather-dashboard/).
+
+## User Story
 **AS A(N)** traveler<br>
 I **WANT** to see the weather outlook for multiple cities<br>
 **SO THAT** I can plan a trip accordingly
@@ -23,10 +27,20 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 >WHEN I click on a city in the search history<br>
 THEN I am again presented with current and future conditions for that city
 
-### Mock-up
+## Licenses
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/avidrunner87/small-talk/blob/main/LICENSE.md)
+
+## Technologies
+![HTML](https://img.shields.io/static/v1?label=html&message=3.6%&color=red)
+![CSS](https://img.shields.io/static/v1?label=css&message=2.2%&color=purple)
+![JavaScript](https://img.shields.io/static/v1?label=javascript&message=94.2%&color=yellow)
+
+## Mock-up
 The following picture shows the website appearance and capabilities:
 
-![Website Mock-Up](./assets/images/website-mockup.gif)
+<img src="./assets/images/screenshots/mockup.gif" width="600"><br>
+<img src="./assets/images/screenshots/screenshot01.png" width="300">
+<img src="./assets/images/screenshots/screenshot02.png" width="300">
 
 ## Installation
 To fork this code to further improve the website, please follow these directions:
@@ -35,8 +49,6 @@ To fork this code to further improve the website, please follow these directions
 1. Clone the repository to your local computer.
 
 _This assumes that you have setup your own SSH keys to connect with Github._
-## Usage
-You can access the website [here](https://avidrunner87.github.io/weather-dashboard/).
 
 ## References
 [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)<br>
