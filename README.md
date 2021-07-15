@@ -31,9 +31,9 @@ THEN I am again presented with current and future conditions for that city
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/avidrunner87/small-talk/blob/main/LICENSE.md)
 
 ## Technologies
-![HTML](https://img.shields.io/static/v1?label=html&message=3.6%&color=red)
-![CSS](https://img.shields.io/static/v1?label=css&message=2.2%&color=purple)
-![JavaScript](https://img.shields.io/static/v1?label=javascript&message=94.2%&color=yellow)
+![HTML](https://img.shields.io/static/v1?label=html&message=10.3%&color=red)
+![CSS](https://img.shields.io/static/v1?label=css&message=7.2%&color=purple)
+![JavaScript](https://img.shields.io/static/v1?label=javascript&message=82.5%&color=yellow)
 
 ## Mock-up
 The following picture shows the website appearance and capabilities:
