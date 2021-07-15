@@ -28,7 +28,7 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 THEN I am again presented with current and future conditions for that city
 
 ## Licenses
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/avidrunner87/small-talk/blob/main/LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/avidrunner87/weather-dashboard/blob/main/LICENSE.md)
 
 ## Technologies
 ![HTML](https://img.shields.io/static/v1?label=html&message=10.3%&color=red)
